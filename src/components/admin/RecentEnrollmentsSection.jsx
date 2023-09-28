@@ -32,6 +32,11 @@ export const RecentEnrollmentsSection = () => {
     callRecentEnrollmentApi();
   }, []);
 
+  function formatDate(date) {
+    const d = new Date(date);
+    return `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`;
+  }
+
   return (
     <Paper withBorder p="md">
       <Title order={4}>Recent Enrollment(s)</Title>
@@ -42,10 +47,16 @@ export const RecentEnrollmentsSection = () => {
         recentEnrollments &&
         recentEnrollments.map((enroll) => (
           <Group spacing="xs" key={enroll.id}>
-            <Text fw="bold" color="dimmed"></Text>
+            <Text fw="bold" color="dimmed">
+              {enroll.student.studentId} - {enroll.student.firstName}
+            </Text>
             <Text color="dimmed">👉</Text>
-            <Text fw="bold" color="dimmed"></Text>
-            <Text color="dimmed" ml="auto"></Text>
+            <Text fw="bold" color="dimmed">
+              {enroll.course.courseNo} - {enroll.course.title}
+            </Text>
+            <Text color="dimmed" ml="auto">
+              {formatDate(enroll.createdAt)}
+            </Text>
           </Group>
         ))}
     </Paper>

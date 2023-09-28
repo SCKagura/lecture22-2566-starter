@@ -58,7 +58,14 @@ export const SummarySection = () => {
               ISNE ({summaryStat.isneCount})
             </Title>
           </Group>
-          <Stack spacing={0}></Stack>
+          <Stack spacing={0}>
+            {summaryStat.enrollmentCountByStudent.map((student) => (
+              <Text key={student.studentId}>
+                {student.studentId} - {student.firstName} {student.lastName}{" "}
+                {student._count.enrollments} course(s)
+              </Text>
+            ))}
+          </Stack>
         </Stack>
       )}
     </Paper>

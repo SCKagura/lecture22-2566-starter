@@ -26,7 +26,12 @@ export const GET = async () => {
 
   const prisma = getPrisma();
 
-  const recentEnrollments = [];
+  const recentEnrollments = await prisma.enrollment.findMany({
+    include: {
+      student: true,
+      course: true,
+    },
+  });
 
   return NextResponse.json({
     ok: true,
